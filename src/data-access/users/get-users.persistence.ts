@@ -3,7 +3,7 @@ import "server-only"
 import { prisma } from "@/lib/prisma"
 import { IUser } from "@/use-cases/users/types"
 
-export function toDtoMapper(user: IUser) {
+export function toUserDtoMapper(user: IUser) {
     return {
         id: user.id,
         name: user.name,
@@ -13,5 +13,5 @@ export function toDtoMapper(user: IUser) {
 
 export async function getUsers(): Promise<IUser[]> {
     const users = await prisma.user.findMany({ take: 10 })
-    return users.map(toDtoMapper)
+    return users.map(toUserDtoMapper)
 }

@@ -16,16 +16,30 @@ model User {
 }
 
 model Project {
-  id          Int      @id @default(autoincrement())
+  id          String       @default(cuid()) @id
   title       String
   slug        String   @unique
   description String
   image       String
-  link_demo   String?
-  link_github String?
+  linkDemo   String?
+  linkGithub String?
   stacks      String[]
-  is_show     Boolean  @default(true)
-  updated_at  DateTime @default(now())
+  isShow     Boolean  @default(true)
+  updatedAt  DateTime @default(now())
   content     String?  @db.Text
-  is_featured Boolean  @default(false)
+  isFeatured Boolean  @default(false)
+}
+
+model Career {
+  id          String       @default(cuid()) @id
+  position    String
+  company     String
+  logo        String
+  location    String
+  locationType String
+  type        String
+  startDate  DateTime 
+  endDate    DateTime? 
+  link        String?   
+  slug        String    @unique
 }
