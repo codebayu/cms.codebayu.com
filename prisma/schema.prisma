@@ -13,10 +13,11 @@ model User {
   id            String       @default(cuid()) @id
   name          String
   email         String   @unique
+  password      String
 }
 
 model Project {
-  id          String       @default(cuid()) @id
+  id          String   @unique    @default(cuid()) @id
   title       String
   slug        String   @unique
   description String
@@ -31,7 +32,7 @@ model Project {
 }
 
 model Career {
-  id          String       @default(cuid()) @id
+  id          String   @unique    @default(cuid()) @id
   position    String
   company     String
   logo        String

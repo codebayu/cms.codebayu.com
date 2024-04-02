@@ -3,7 +3,7 @@ import { PrismaClient, Prisma } from "@prisma/client"
 const prisma = new PrismaClient()
 
 const getUsers = (): Prisma.UserCreateInput[] => [
-    { email: 'bayu@gmail.com', name: 'bayu setiawan' }
+    { email: 'test@gmail.com', name: 'bayu setiawan', password: 'test' }
 ]
 
 const main = async () => {

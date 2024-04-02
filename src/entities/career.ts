@@ -16,6 +16,18 @@ export class CareerEntityValidationError extends Error {
     }
 }
 
+export const careerSchema = z.object({
+    position: z.string().min(1),
+    company: z.string().min(1),
+    logo: z.string().min(1),
+    location: z.string().min(1),
+    locationType: z.string().min(1),
+    type: z.string().min(1),
+    startDate: z.date(),
+    endDate: z.date(),
+    link: z.string().min(1),
+})
+
 export class CareerEntity {
     private position: string
     private company: string
@@ -95,17 +107,6 @@ export class CareerEntity {
     }
 
     private validate() {
-        const careerSchema = z.object({
-            position: z.string().min(1),
-            company: z.string().min(1),
-            logo: z.string().min(1),
-            location: z.string().min(1),
-            locationType: z.string().min(1),
-            type: z.string().min(1),
-            startDate: z.date(),
-            endDate: z.date().nullish(),
-            link: z.string().nullish(),
-        })
 
         try {
             careerSchema.parse(this)
