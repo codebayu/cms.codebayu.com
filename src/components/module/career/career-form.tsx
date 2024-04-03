@@ -63,7 +63,7 @@ export default function CareerForm() {
     }
     toast({
       title: 'Success!',
-      description: `You have successfully update a new career.`
+      description: `You have successfully update the career.`
     })
   }
 

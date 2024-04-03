@@ -1,21 +1,21 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createCareerUseCase } from '@/use-cases/careers/create-career.use-case'
-import { ICreateCareerDto } from '@/use-cases/careers/types'
-import { createCareer } from '@/data-access/careers/create-career.persistence'
 import { auth } from '@/lib/auth'
 import { CreateItemState } from '@/types/actions'
 import { ValidationError } from '@/utils/error'
-import { careerDefaultValueForm } from '@/constants/career'
+import { ICreateServiceDto } from '@/use-cases/services/types'
+import { createServiceUseCase } from '@/use-cases/services/create-service.use-case'
+import { createService } from '@/data-access/services/create-service.persistence'
+import { serviceDefaultValueForm } from '@/constants/service'
 
-export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState<ICreateCareerDto>> {
+export async function createServiceAction(formData: ICreateServiceDto): Promise<CreateItemState<ICreateServiceDto>> {
   const { getUser } = await auth()
   try {
-    await createCareerUseCase({ getUser, createCareer }, { ...formData })
-    revalidatePath('/career')
+    await createServiceUseCase({ getUser, createService }, { ...formData })
+    revalidatePath('/service')
     return {
-      form: { ...careerDefaultValueForm, slug: '' },
+      form: serviceDefaultValueForm,
       status: 'success'
     }
   } catch (err) {

@@ -10,11 +10,12 @@ import { Button } from '../ui/button'
 
 export default function Navigation({ user }: { user: User }) {
   const segment = useSelectedLayoutSegment()
+  const navigations = !user ? navItems.filter(item => !item.protected) : navItems
   return (
     <nav className="flex w-full items-center justify-between p-2 lg:px-20">
       <div className="p-1 ">
         <div className="flex space-x-8">
-          {navItems.map(item => (
+          {navigations.map(item => (
             <Link key={item.name} href={item.href}>
               <Button
                 variant="link"

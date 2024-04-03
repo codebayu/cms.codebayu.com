@@ -14,11 +14,11 @@ export default function CareerTable({ careers }: { careers: ICareer[] }) {
     setFormType('create')
   }
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-baseline justify-between">
         <h2 className="mb-6 text-2xl font-bold">My Career</h2>
         <Button variant="outline" onClick={handleClickAdd}>
-          Add Career
+          New Career
         </Button>
       </div>
       <DataTable columns={careerTableColumns} data={careers} />
