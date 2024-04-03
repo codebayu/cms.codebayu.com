@@ -1,3 +1,3 @@
 export default function PromotionPage() {
-  return <div>PromotionPage</div>;
+  return <div>PromotionPage</div>
 }

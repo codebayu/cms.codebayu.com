@@ -1,13 +1,13 @@
-import CareerForm from '@/components/module/career/career-form';
-import CareerTable from '@/components/module/career/career-table';
-import { getCareers } from '@/data-access/careers/get-careers.persistence';
+import { getCareers } from '@/data-access/careers/get-careers.persistence'
+import CareerForm from '@/components/module/career/career-form'
+import CareerTable from '@/components/module/career/career-table'
 
 export default async function CareerPage() {
-  const careers = await getCareers();
+  const careers = await getCareers()
   return (
-    <div className="flex w-full justify-between relative">
+    <div className="relative flex w-full justify-between">
       <CareerTable careers={careers} />
       <CareerForm />
     </div>
-  );
+  )
 }

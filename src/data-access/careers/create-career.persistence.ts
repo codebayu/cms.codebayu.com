@@ -1,8 +1,7 @@
-import "server-only"
-
-import { prisma } from "@/lib/prisma"
-import { ICreateCareerDto } from "@/use-cases/careers/types"
+import 'server-only'
+import { ICreateCareerDto } from '@/use-cases/careers/types'
+import { prisma } from '@/lib/prisma'
 
 export async function createCareer(career: ICreateCareerDto): Promise<void> {
-    await prisma.career.create({ data: career })
+  await prisma.career.create({ data: career })
 }

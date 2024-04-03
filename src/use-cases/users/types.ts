@@ -1,12 +1,11 @@
 export type IUser = {
-    id: string
-    name: string
-    email: string
+  id: string
+  name: string
+  email: string
 }
 
 export type User = {
-    userId: string;
-};
+  userId: string
+}
 
-
-export type GetUser = () => User | undefined;
+export type GetUser = () => User | undefined

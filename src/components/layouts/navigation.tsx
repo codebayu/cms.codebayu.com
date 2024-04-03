@@ -1,28 +1,25 @@
-'use client';
+'use client'
 
-import { navItems } from '@/constants/nav';
-import { Button } from '../ui/button';
-import { useSelectedLayoutSegment } from 'next/navigation';
-import Link from 'next/link';
-import SigninButton from '../elements/auth-button';
-import { cn } from '@/lib/utils';
-import { IUser } from '@/use-cases/users/types';
+import Link from 'next/link'
+import { useSelectedLayoutSegment } from 'next/navigation'
+import { navItems } from '@/constants/nav'
+import { IUser } from '@/use-cases/users/types'
+import { cn } from '@/lib/utils'
+import SigninButton from '../elements/auth-button'
+import { Button } from '../ui/button'
 
 export default function Navigation({ user }: { user: IUser }) {
-  const segment = useSelectedLayoutSegment();
+  const segment = useSelectedLayoutSegment()
   return (
-    <nav className="flex justify-between items-center p-2 lg:px-20 w-full">
+    <nav className="flex w-full items-center justify-between p-2 lg:px-20">
       <div className="p-1 ">
-        <div className="space-x-8 flex">
-          {navItems.map((item) => (
+        <div className="flex space-x-8">
+          {navItems.map(item => (
             <Link key={item.name} href={item.href}>
               <Button
                 variant="link"
                 size="lg"
-                className={cn(
-                  item.segment === segment ? 'font-extrabold' : '',
-                  'justify-start px-0 py-0'
-                )}
+                className={cn(item.segment === segment ? 'font-extrabold' : '', 'justify-start px-0 py-0')}
               >
                 {item.name}
               </Button>
@@ -33,5 +30,5 @@ export default function Navigation({ user }: { user: IUser }) {
 
       <SigninButton user={user} />
     </nav>
-  );
+  )
 }
