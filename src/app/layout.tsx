@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { User } from '@/use-cases/users/types'
 import { auth } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 import Navigation from '@/components/layouts/navigation'
@@ -26,7 +27,7 @@ export default async function RootLayout({
         <head />
         <body className={cn('min-h-screen bg-neutral-50 font-sans text-slate-900 antialiased', inter.className)}>
           <main className="relative flex min-h-screen flex-col">
-            <Navigation user={user} />
+            <Navigation user={user as User} />
             <div className="flex flex-1 p-2 py-4 lg:px-20">{children}</div>
             <Toaster />
           </main>

@@ -3,12 +3,12 @@
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { navItems } from '@/constants/nav'
-import { IUser } from '@/use-cases/users/types'
+import { User } from '@/use-cases/users/types'
 import { cn } from '@/lib/utils'
 import SigninButton from '../elements/auth-button'
 import { Button } from '../ui/button'
 
-export default function Navigation({ user }: { user: IUser }) {
+export default function Navigation({ user }: { user: User }) {
   const segment = useSelectedLayoutSegment()
   return (
     <nav className="flex w-full items-center justify-between p-2 lg:px-20">

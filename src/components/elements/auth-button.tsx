@@ -1,10 +1,10 @@
 'use client'
 
 import { signIn, signOut } from 'next-auth/react'
-import { IUser } from '@/use-cases/users/types'
+import { User } from '@/use-cases/users/types'
 import { Button } from '../ui/button'
 
-export default function AuthButton({ user }: { user: IUser }) {
+export default function AuthButton({ user }: { user: User }) {
   function handleClick() {
     if (user) return signOut()
     signIn()

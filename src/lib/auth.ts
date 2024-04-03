@@ -5,6 +5,7 @@ import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import { Adapter } from 'next-auth/adapters'
 import Credentials from 'next-auth/providers/credentials'
 import { prisma } from '@/lib/prisma'
+import { User } from '@/use-cases/users/types'
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -81,5 +82,5 @@ export async function auth(
 ) {
   unstable_noStore()
   const session = await getServerSession(...args, authConfig)
-  return { getUser: () => session?.user && { userId: session.user.id } }
+  return { getUser: () => session?.user && { userId: session.user.id } as User }
 }
