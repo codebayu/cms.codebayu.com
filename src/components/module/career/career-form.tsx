@@ -50,7 +50,10 @@ export default function CareerForm() {
 
   async function onCreateAction(values: FormValues, slug: string) {
     const result = await createCareerAction({ ...values, slug });
-    if (result.status !== 'success') return;
+    if (result.status === 'error') {
+      toast({ title: result.status, description: result.errors });
+      return;
+    }
     form.reset();
     toast({
       title: 'Success!',
@@ -64,7 +67,10 @@ export default function CareerForm() {
       slug,
       id: defaultValueForm.id,
     });
-    if (result.status !== 'success') return;
+    if (result.status === 'error') {
+      toast({ title: result.status, description: result.errors });
+      return;
+    }
     toast({
       title: 'Success!',
       description: `You have successfully update a new career.`,

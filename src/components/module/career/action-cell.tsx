@@ -17,11 +17,15 @@ export function ActionCell({ cell }: { row: Row<ICareer>; cell: any }) {
   }
 
   async function handleDelete() {
-    await deleteCareerAction(cell.row.original.id);
+    try {
+      await deleteCareerAction(cell.row.original.id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (
-    <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center gap-1">
       <Button size="sm" variant="ghost" onClick={handleEdit}>
         Edit
       </Button>
