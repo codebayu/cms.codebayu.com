@@ -3,10 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { createCareerUseCase } from '@/use-cases/careers/create-career.use-case'
 import { ICreateCareerDto } from '@/use-cases/careers/types'
-import { ValidationError } from '@/use-cases/careers/utils'
 import { createCareer } from '@/data-access/careers/create-career.persistence'
 import { auth } from '@/lib/auth'
 import { CreateItemState } from '@/types/actions'
+import { ValidationError } from '@/utils/error'
 
 export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState<ICreateCareerDto>> {
   const { getUser } = await auth()
