@@ -1,55 +1,30 @@
 "use server";
 
-
 import { createCareer } from "@/data-access/careers/create-career.persistence";
 import { auth } from "@/lib/auth";
+import { CreateItemState } from "@/types/actions";
 import { createCareerUseCase } from "@/use-cases/careers/create-career.use-case";
 import { ICreateCareerDto } from "@/use-cases/careers/types";
 import { ValidationError } from "@/use-cases/careers/utils";
 import { revalidatePath } from "next/cache";
 
-type FieldErrorsState = {
-    status: "field-errors";
-    errors: Partial<Record<keyof ICreateCareerDto, string>>;
-};
-
-type DefaultState = {
-    status: "default";
-};
-
-type SubmitErrorState = {
-    status: "error";
-    errors: string;
-};
-
-type SuccessState = {
-    status: "success";
-};
-
-type CreateItemState = { form: ICreateCareerDto } & (
-    | SuccessState
-    | SubmitErrorState
-    | FieldErrorsState
-    | DefaultState
-);
-
-export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState> {
+export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState<ICreateCareerDto>> {
     const { getUser } = await auth();
     try {
         await createCareerUseCase({ getUser, createCareer }, { ...formData });
-        revalidatePath("/");
+        revalidatePath("/career");
         return {
             form: {
                 position: '',
                 company: '',
                 link: '',
                 location: '',
-                locationType: '',
-                type: '',
+                locationType: 'on-site',
+                type: 'full-time',
                 startDate: new Date(),
                 endDate: new Date(),
-                slug: '',
                 logo: '',
+                slug: ''
             },
             status: "success",
         };

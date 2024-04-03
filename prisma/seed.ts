@@ -2,12 +2,12 @@ import { PrismaClient, Prisma } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-const getUsers = (): Prisma.UserCreateInput[] => [
-    { email: 'test@gmail.com', name: 'bayu setiawan', password: 'test' }
+const getCareers = (): Prisma.CareerCreateInput[] => [
+    { position: 'Software Engineer', company: 'Google', logo: 'google.png', location: 'Jakarta', locationType: 'remote', type: 'full-time', startDate: new Date(), endDate: new Date(), link: 'www.google.com', slug: 'google' }
 ]
 
 const main = async () => {
-    await Promise.all(getUsers().map(user => prisma.user.create({ data: user })))
+    await Promise.all(getCareers().map(career => prisma.career.create({ data: career })))
 }
 
 main()

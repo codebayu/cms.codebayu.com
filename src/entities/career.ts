@@ -1,4 +1,4 @@
-import { ICreateCareerDto } from "@/use-cases/careers/types";
+import { ICareer } from "@/use-cases/careers/types";
 import { ZodError, z } from "zod";
 
 type ValidatedFields = "position" | "company" | "logo" | "location" | "locationType" | "type" | "startDate" | "endDate" | "link";
@@ -29,6 +29,7 @@ export const careerSchema = z.object({
 })
 
 export class CareerEntity {
+    private id?: string
     private position: string
     private company: string
     private logo: string
@@ -36,11 +37,12 @@ export class CareerEntity {
     private locationType: string
     private type: string
     private startDate: Date
-    private endDate: Date | null
-    private link: string | null
+    private endDate: Date
+    private link: string
     private slug: string
 
     constructor({
+        id,
         position,
         company,
         logo,
@@ -51,7 +53,9 @@ export class CareerEntity {
         endDate,
         link,
         slug
-    }: ICreateCareerDto) {
+    }: ICareer) {
+
+        this.id = id
         this.position = position
         this.company = company
         this.logo = logo
@@ -64,6 +68,10 @@ export class CareerEntity {
         this.slug = slug
 
         this.validate()
+    }
+
+    getId() {
+        return this.id
     }
 
     getPosition() {
