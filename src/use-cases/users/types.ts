@@ -3,3 +3,10 @@ export type IUser = {
     name: string
     email: string
 }
+
+export type User = {
+    userId: string;
+};
+
+
+export type GetUser = () => User | undefined;

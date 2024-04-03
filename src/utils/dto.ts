@@ -1,4 +1,5 @@
 import { ICareer } from "@/use-cases/careers/types";
+import { IService } from "@/use-cases/services/types";
 
 export function toCareerDtoMapper(career: ICareer) {
     return {
@@ -13,5 +14,14 @@ export function toCareerDtoMapper(career: ICareer) {
         endDate: career.endDate,
         link: career.link,
         slug: career.slug
+    }
+}
+
+export function toServiceDtoMapper(service: IService) {
+    return {
+        id: service.id,
+        title: service.title,
+        description: service.description,
+        tag: service.tag
     }
 }

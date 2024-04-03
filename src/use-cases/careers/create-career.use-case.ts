@@ -1,6 +1,8 @@
 import { CareerEntity, CareerEntityValidationError } from "@/entities/career";
-import { CreateCareer, GetUser, ICreateCareerDto } from "./types";
-import { AuthenticationError, ValidationError, careerToCreateCareerDtoMapper } from "./utils";
+import { CreateCareer, ICreateCareerDto } from "./types";
+import { careerToCreateCareerDtoMapper } from "./utils";
+import { GetUser } from "../users/types";
+import { AuthenticationError, ValidationError } from "@/utils/error";
 
 export async function createCareerUseCase(
     context: {

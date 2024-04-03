@@ -1,20 +1,10 @@
 import { ICareer } from "@/use-cases/careers/types";
 import { ZodError, z } from "zod";
+import { EntityValidationError } from "./utils";
 
 type ValidatedFields = "position" | "company" | "logo" | "location" | "locationType" | "type" | "startDate" | "endDate" | "link";
 
-export class CareerEntityValidationError extends Error {
-    private errors: Record<ValidatedFields, string | undefined>;
-
-    constructor(errors: Record<ValidatedFields, string | undefined>) {
-        super("An error occured validating an career entity");
-        this.errors = errors;
-    }
-
-    getErrors() {
-        return this.errors;
-    }
-}
+export class CareerEntityValidationError extends EntityValidationError<ValidatedFields> { }
 
 export const careerSchema = z.object({
     position: z.string().min(1),

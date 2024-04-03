@@ -1,5 +1,6 @@
-import { DeleteCareer, GetUser } from "./types";
-import { AuthenticationError } from "./utils";
+import { AuthenticationError } from "@/utils/error";
+import { GetUser } from "../users/types";
+import { DeleteCareer } from "./types";
 
 export async function deleteCareerUseCase(
     context: {
