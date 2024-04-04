@@ -1,11 +1,13 @@
 import { CellContext } from '@tanstack/react-table'
 import { IService } from '@/use-cases/services/types'
-import useServiceActionCell from '@/hooks/services/useServiceActionCell'
+import { deleteServiceAction } from '@/actions/services/delete-service.action'
+import useActionCell from '@/hooks/forms/useActionCell'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 export function ActionCell({ cell }: { cell: CellContext<IService, unknown> }) {
-  const { handleDelete, handleEdit } = useServiceActionCell(cell)
+  const { handleDelete, handleEdit } = useActionCell<IService>({ cell, deleteAction: deleteServiceAction })
+
   return (
     <div className="flex flex-row items-center gap-1">
       <Button size="sm" variant="ghost" onClick={handleEdit}>

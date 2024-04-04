@@ -51,3 +51,15 @@ model Service {
   title       String
   description String
 }
+
+model Learn {
+  id            String  @unique @default(cuid()) @id
+  title         String
+  description   String
+  slug          String    @unique
+  image         String
+  level         String
+  language      String
+  isNew         Boolean
+  isShow        Boolean
+}

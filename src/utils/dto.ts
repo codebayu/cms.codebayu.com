@@ -1,4 +1,5 @@
 import { ICareer } from '@/use-cases/careers/types'
+import { ILearn } from '@/use-cases/learns/types'
 import { IService } from '@/use-cases/services/types'
 
 export function toCareerDtoMapper(career: ICareer) {
@@ -23,5 +24,19 @@ export function toServiceDtoMapper(service: IService) {
     title: service.title,
     description: service.description,
     tag: service.tag
+  }
+}
+
+export function toLearnDtoMapper(learn: ILearn) {
+  return {
+    id: learn.id,
+    title: learn.title,
+    description: learn.description,
+    image: learn.image,
+    slug: learn.slug,
+    level: learn.level,
+    language: learn.language,
+    isNew: learn.isNew,
+    isShow: learn.isShow
   }
 }

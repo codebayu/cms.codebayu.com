@@ -1,7 +1,11 @@
 'use client'
 
-import useCareerForm from '@/hooks/careers/useCareerForm'
-import { locationsTypeOptions, typeOptions } from '@/constants/career'
+import { careerSchema } from '@/entities/career'
+import { ICareer, ICreateCareerDto } from '@/use-cases/careers/types'
+import { createCareerAction } from '@/actions/careers/create-career.action'
+import { updateCareerAction } from '@/actions/careers/update-career.action'
+import useActionForm from '@/hooks/forms/useActionForm'
+import { careerDefaultValueForm, locationsTypeOptions, typeOptions } from '@/constants/career'
 import DatePicker from '@/components/elements/date-picker'
 import SelectOptions from '@/components/elements/select-options'
 import SubmitButton from '@/components/elements/submit-button'
@@ -9,8 +13,16 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 
 export default function CareerForm() {
-  const { copyButtonIdle, copyButtonSubmitting, form, formType, defaultValueForm, isPending, onSubmit } =
-    useCareerForm()
+  const { copyButtonIdle, copyButtonSubmitting, form, formType, defaultValueForm, isPending, onSubmit } = useActionForm<
+    ICareer,
+    ICreateCareerDto
+  >({
+    title: 'career',
+    schema: careerSchema,
+    createAction: createCareerAction,
+    defaultValue: careerDefaultValueForm,
+    updateAction: updateCareerAction
+  })
   return (
     <div>
       <Form {...form}>
