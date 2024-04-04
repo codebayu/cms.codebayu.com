@@ -2,9 +2,9 @@ import { ZodError, z } from 'zod'
 import { IService } from '@/use-cases/services/types'
 import { EntityValidationError } from './utils'
 
-type ValidatedFields = 'tag' | 'title' | 'description'
+export type ServiceValidatedFields = 'tag' | 'title' | 'description'
 
-export class ServiceEntityValidationError extends EntityValidationError<ValidatedFields> {}
+export class ServiceEntityValidationError extends EntityValidationError<ServiceValidatedFields> {}
 
 export const serviceSchema = z.object({
   tag: z.string().min(1),

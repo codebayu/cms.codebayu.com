@@ -6,8 +6,8 @@ import { updateCareerUseCase } from '@/use-cases/careers/update-career.use-case'
 import { getCareer } from '@/data-access/careers/get-career.persistence'
 import { updateCareer } from '@/data-access/careers/update-career.persistence'
 import { auth } from '@/lib/auth'
-import { CreateItemState } from '@/types/actions'
 import { ValidationError } from '@/utils/error'
+import { CreateItemState } from '@/types/actions'
 
 export async function updateCareerAction(formData: ICareer): Promise<CreateItemState<ICareer>> {
   const { getUser } = await auth()

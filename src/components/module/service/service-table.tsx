@@ -1,18 +1,13 @@
 'use client'
 
-import { serviceDefaultValueForm } from '@/constants/service'
 import { IService } from '@/use-cases/services/types'
+import useServiceTable from '@/hooks/services/useServiceTable'
 import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/ui/data-table'
-import { useServiceStore } from '@/stores/service'
 import { serviceTableColumns } from './columns'
 
 export default function ServiceTable({ service }: { service: IService[] }) {
-  const { setFormType, setDefaultValueForm } = useServiceStore()
-  function handleClickAdd() {
-    setDefaultValueForm({ ...serviceDefaultValueForm, id: '' })
-    setFormType('create')
-  }
+  const { handleClickAdd } = useServiceTable()
   return (
     <div className="w-[50%]">
       <div className="flex items-baseline justify-between">
