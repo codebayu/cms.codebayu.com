@@ -1,3 +1,5 @@
+import { generateRandomString } from '@/utils/functions'
+
 export const locationsTypeOptions = [
   { label: 'On-site', value: 'on-site' },
   { label: 'Remote', value: 'remote' },
@@ -21,5 +23,6 @@ export const careerDefaultValueForm = {
   type: 'full-time',
   startDate: new Date(),
   endDate: new Date(),
-  logo: ''
+  logo: '',
+  slug: generateRandomString(10)
 }

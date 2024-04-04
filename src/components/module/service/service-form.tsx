@@ -1,14 +1,24 @@
 'use client'
 
-import { ServiceValidatedFields } from '@/entities/service'
-import useServiceForm from '@/hooks/services/useServiceForm'
+import { ServiceValidatedFields, serviceSchema } from '@/entities/service'
+import { ICreateServiceDto, IService } from '@/use-cases/services/types'
+import { createServiceAction } from '@/actions/services/create-service.action'
+import { updateServiceAction } from '@/actions/services/update-service.action'
+import useActionForm from '@/hooks/forms/useActionForm'
+import { serviceDefaultValueForm } from '@/constants/service'
 import SubmitButton from '@/components/elements/submit-button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
 export default function ServiceForm() {
   const { form, formRef, onSubmit, copyButtonIdle, copyButtonSubmitting, formType, defaultValueForm, isPending } =
-    useServiceForm()
+    useActionForm<IService, ICreateServiceDto>({
+      title: 'service',
+      schema: serviceSchema,
+      createAction: createServiceAction,
+      defaultValue: serviceDefaultValueForm,
+      updateAction: updateServiceAction
+    })
   return (
     <div>
       <Form {...form}>

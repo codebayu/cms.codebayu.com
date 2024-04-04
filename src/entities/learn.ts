@@ -14,10 +14,15 @@ export type LearnValidatedFields =
 
 export class LearnEntityValidationError extends EntityValidationError<LearnValidatedFields> {}
 
-export const serviceSchema = z.object({
-  tag: z.string().min(1),
+export const learnSchema = z.object({
   title: z.string().min(1),
-  description: z.string().min(1)
+  description: z.string().min(1),
+  slug: z.string().min(1),
+  image: z.string().min(1),
+  level: z.string().min(1),
+  language: z.string().min(1),
+  isNew: z.boolean(),
+  isShow: z.boolean()
 })
 
 export class LearnEntity {
@@ -83,7 +88,7 @@ export class LearnEntity {
 
   private validate() {
     try {
-      serviceSchema.parse(this)
+      learnSchema.parse(this)
     } catch (err) {
       const error = err as ZodError
       const errors = error.flatten().fieldErrors

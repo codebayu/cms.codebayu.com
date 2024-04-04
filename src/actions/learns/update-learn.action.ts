@@ -1,21 +1,21 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createCareerUseCase } from '@/use-cases/careers/create-career.use-case'
-import { ICreateCareerDto } from '@/use-cases/careers/types'
-import { createCareer } from '@/data-access/careers/create-career.persistence'
+import { ILearn } from '@/use-cases/learns/types'
+import { updateLearnUseCase } from '@/use-cases/learns/update-learn.use-case'
+import { getLearn } from '@/data-access/learns/get-learn.persistence'
+import { updateLearn } from '@/data-access/learns/update-learn.persistence'
 import { auth } from '@/lib/auth'
 import { ValidationError } from '@/utils/error'
 import { CreateItemState } from '@/types/actions'
-import { careerDefaultValueForm } from '@/constants/career'
 
-export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState<ICreateCareerDto>> {
+export async function updateLearnAction(formData: ILearn): Promise<CreateItemState<ILearn>> {
   const { getUser } = await auth()
   try {
-    await createCareerUseCase({ getUser, createCareer }, { ...formData })
-    revalidatePath('/career')
+    await updateLearnUseCase({ getUser, updateLearn, getLearn }, { ...formData })
+    revalidatePath('/learn')
     return {
-      form: { ...careerDefaultValueForm },
+      form: { ...formData },
       status: 'success'
     }
   } catch (err) {

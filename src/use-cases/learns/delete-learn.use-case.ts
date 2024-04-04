@@ -2,7 +2,7 @@ import { AuthenticationError } from '@/utils/error'
 import { GetUser } from '../users/types'
 import { DeleteLearn } from './types'
 
-export async function deleteCareerUseCase(
+export async function deleteLearnUseCase(
   context: {
     getUser: GetUser
     deleteLearn: DeleteLearn

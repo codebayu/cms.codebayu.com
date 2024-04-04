@@ -5,7 +5,7 @@ import { GetUser } from '../users/types'
 import { GetLearn, ILearn, UpdateLearn } from './types'
 import { learnToDto } from './utils'
 
-export async function updateCareerUseCase(
+export async function updateLearnUseCase(
   context: {
     getUser: GetUser
     getLearn: GetLearn
