@@ -3,10 +3,10 @@ import { useRef, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { serviceSchema } from '@/entities/service'
-import { ICreateServiceDto } from '@/use-cases/services/types'
+import { ICreateServiceDto, IService } from '@/use-cases/services/types'
 import { createServiceAction } from '@/actions/services/create-service.action'
 import { updateServiceAction } from '@/actions/services/update-service.action'
-import { useServiceStore } from '@/stores/service'
+import { useFormStore } from '@/stores/form'
 import { serviceDefaultValueForm } from '@/constants/service'
 import { useToast } from '@/components/ui/use-toast'
 
@@ -15,7 +15,7 @@ type FormValues = z.infer<typeof serviceSchema>
 export default function useServiceForm() {
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
-  const { formType, defaultValueForm } = useServiceStore()
+  const { formType, defaultValueForm } = useFormStore<IService>()
   const [isPending, startTransition] = useTransition()
 
   const form = useForm<FormValues>({

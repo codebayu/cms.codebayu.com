@@ -1,10 +1,10 @@
 import { CellContext } from '@tanstack/react-table'
 import { IService } from '@/use-cases/services/types'
 import { deleteServiceAction } from '@/actions/services/delete-service.action'
-import { useServiceStore } from '@/stores/service'
+import { useFormStore } from '@/stores/form'
 
 export default function useServiceActionCell(cell: CellContext<IService, unknown>) {
-  const { setFormType, setDefaultValueForm } = useServiceStore()
+  const { setFormType, setDefaultValueForm } = useFormStore<IService>()
   function handleEdit() {
     setDefaultValueForm(cell.row.original)
     setFormType('update')

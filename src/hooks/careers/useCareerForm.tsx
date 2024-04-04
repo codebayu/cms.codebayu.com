@@ -3,10 +3,11 @@ import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { careerSchema } from '@/entities/career'
+import { ICareer } from '@/use-cases/careers/types'
 import { createCareerAction } from '@/actions/careers/create-career.action'
 import { updateCareerAction } from '@/actions/careers/update-career.action'
 import { generateSlug } from '@/utils/functions'
-import { useCareerStore } from '@/stores/career'
+import { useFormStore } from '@/stores/form'
 import { careerDefaultValueForm } from '@/constants/career'
 import { useToast } from '@/components/ui/use-toast'
 
@@ -14,7 +15,7 @@ type FormValues = z.infer<typeof careerSchema>
 
 export default function useCareerForm() {
   const { toast } = useToast()
-  const { formType, defaultValueForm } = useCareerStore()
+  const { formType, defaultValueForm } = useFormStore<ICareer>()
   const [isPending, startTransition] = useTransition()
   const form = useForm<z.infer<typeof careerSchema>>({
     resolver: zodResolver(careerSchema),
