@@ -6,9 +6,13 @@ import { serviceDefaultValueForm } from '@/constants/service'
 import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/ui/data-table'
 import { serviceTableColumns } from './columns'
+import ServiceForm from './service-form'
 
 export default function ServiceTable({ service }: { service: IService[] }) {
-  const { handleClickAdd } = useActionTable<IService>({ defaultValue: serviceDefaultValueForm })
+  const { handleClickAdd } = useActionTable<IService>({
+    defaultValue: serviceDefaultValueForm,
+    dialogContent: () => <ServiceForm />
+  })
   return (
     <div className="w-[50%]">
       <div className="flex items-baseline justify-between">

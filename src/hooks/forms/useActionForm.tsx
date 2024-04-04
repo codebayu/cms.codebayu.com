@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRef, useTransition } from 'react'
 import { DefaultValues, FieldValues, useForm } from 'react-hook-form'
 import { ZodSchema } from 'zod'
+import { useDialogStore } from '@/stores/dialog'
 import { useFormStore } from '@/stores/form'
 import { CreateItemState, WithId } from '@/types/actions'
 import { useToast } from '@/components/ui/use-toast'
@@ -24,6 +25,7 @@ export default function useActionForm<T, D>({
   const { toast } = useToast()
   const formRef = useRef<HTMLFormElement>(null)
   const { formType, defaultValueForm } = useFormStore<WithId<T>>()
+  const { hideDialog } = useDialogStore()
   const [isPending, startTransition] = useTransition()
 
   const form = useForm<T & FieldValues>({
@@ -49,6 +51,7 @@ export default function useActionForm<T, D>({
       return
     }
     form.reset()
+    hideDialog()
     toast({
       title: 'Success!',
       description: `You have successfully created a new ${title}.`
@@ -60,6 +63,7 @@ export default function useActionForm<T, D>({
       ...values,
       id: defaultValueForm.id
     })
+    hideDialog()
     if (result.status === 'error') {
       toast({ title: result.status, description: result.errors })
       return
