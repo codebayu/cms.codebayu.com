@@ -2,7 +2,7 @@ import { ZodError, z } from 'zod'
 import { ICareer } from '@/use-cases/careers/types'
 import { EntityValidationError } from './utils'
 
-type ValidatedFields =
+export type CareerValidatedFields =
   | 'position'
   | 'company'
   | 'logo'
@@ -13,7 +13,7 @@ type ValidatedFields =
   | 'endDate'
   | 'link'
 
-export class CareerEntityValidationError extends EntityValidationError<ValidatedFields> {}
+export class CareerEntityValidationError extends EntityValidationError<CareerValidatedFields> {}
 
 export const careerSchema = z.object({
   position: z.string().min(1),

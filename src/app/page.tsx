@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { GithubRepository } from '@/constants/nav'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
+import { GithubRepository } from '@/constants/nav'
 
 export default async function HomePage() {
   return (

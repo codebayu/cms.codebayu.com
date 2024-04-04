@@ -1,22 +1,11 @@
 import { CellContext } from '@tanstack/react-table'
 import { IService } from '@/use-cases/services/types'
-import { deleteServiceAction } from '@/app/service/actions/delete-service.action'
+import useServiceActionCell from '@/hooks/services/useServiceActionCell'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useServiceStore } from '@/stores/service'
 
 export function ActionCell({ cell }: { cell: CellContext<IService, unknown> }) {
-  const { setFormType, setDefaultValueForm } = useServiceStore()
-  function handleEdit() {
-    setDefaultValueForm(cell.row.original)
-    setFormType('update')
-  }
-
-  async function handleDelete() {
-    const cellId = cell.row.original.id
-    if (cellId) await deleteServiceAction(cellId)
-  }
-
+  const { handleDelete, handleEdit } = useServiceActionCell(cell)
   return (
     <div className="flex flex-row items-center gap-1">
       <Button size="sm" variant="ghost" onClick={handleEdit}>

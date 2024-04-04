@@ -1,22 +1,11 @@
 import { CellContext } from '@tanstack/react-table'
 import { ICareer } from '@/use-cases/careers/types'
-import { deleteCareerAction } from '@/app/career/actions/delete-career.action'
+import useCareerActionCell from '@/hooks/careers/useCareerActionCell'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useCareerStore } from '@/stores/career'
 
 export function ActionCell({ cell }: { cell: CellContext<ICareer, unknown> }) {
-  const { setFormType, setDefaultValueForm } = useCareerStore()
-  function handleEdit() {
-    setDefaultValueForm(cell.row.original)
-    setFormType('update')
-  }
-
-  async function handleDelete() {
-    const cellId = cell.row.original.id
-    if (cellId) await deleteCareerAction(cellId)
-  }
-
+  const { handleDelete, handleEdit } = useCareerActionCell(cell)
   return (
     <div className="flex flex-row items-center gap-1">
       <Button size="sm" variant="ghost" onClick={handleEdit}>

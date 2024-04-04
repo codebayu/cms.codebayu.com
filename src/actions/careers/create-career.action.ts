@@ -5,8 +5,8 @@ import { createCareerUseCase } from '@/use-cases/careers/create-career.use-case'
 import { ICreateCareerDto } from '@/use-cases/careers/types'
 import { createCareer } from '@/data-access/careers/create-career.persistence'
 import { auth } from '@/lib/auth'
-import { CreateItemState } from '@/types/actions'
 import { ValidationError } from '@/utils/error'
+import { CreateItemState } from '@/types/actions'
 import { careerDefaultValueForm } from '@/constants/career'
 
 export async function createCareerAction(formData: ICreateCareerDto): Promise<CreateItemState<ICreateCareerDto>> {

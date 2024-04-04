@@ -1,5 +1,5 @@
 export const serviceDefaultValueForm = {
-    title: '',
-    description: '',
-    tag: ''
+  title: '',
+  description: '',
+  tag: ''
 }

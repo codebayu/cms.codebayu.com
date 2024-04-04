@@ -1,21 +1,21 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { IService } from '@/use-cases/services/types'
+import { updateServiceUseCase } from '@/use-cases/services/update-service.use-case'
+import { getService } from '@/data-access/services/get-service.persistence'
+import { updateService } from '@/data-access/services/update-service.persistence'
 import { auth } from '@/lib/auth'
-import { CreateItemState } from '@/types/actions'
 import { ValidationError } from '@/utils/error'
-import { ICreateServiceDto } from '@/use-cases/services/types'
-import { createServiceUseCase } from '@/use-cases/services/create-service.use-case'
-import { createService } from '@/data-access/services/create-service.persistence'
-import { serviceDefaultValueForm } from '@/constants/service'
+import { CreateItemState } from '@/types/actions'
 
-export async function createServiceAction(formData: ICreateServiceDto): Promise<CreateItemState<ICreateServiceDto>> {
+export async function updateServiceAction(formData: IService): Promise<CreateItemState<IService>> {
   const { getUser } = await auth()
   try {
-    await createServiceUseCase({ getUser, createService }, { ...formData })
+    await updateServiceUseCase({ getUser, updateService, getService }, { ...formData })
     revalidatePath('/service')
     return {
-      form: serviceDefaultValueForm,
+      form: { ...formData },
       status: 'success'
     }
   } catch (err) {

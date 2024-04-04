@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { navItems } from '@/constants/nav'
 import { User } from '@/use-cases/users/types'
 import { cn } from '@/lib/utils'
+import { navItems } from '@/constants/nav'
 import SigninButton from '../elements/auth-button'
 import { Button } from '../ui/button'
 
