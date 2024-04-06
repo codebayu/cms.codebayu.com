@@ -9,7 +9,7 @@ export function learnToCreateCareerDtoMapper(learn: LearnEntity): ICreateLearnDt
     slug: learn.getSlug(),
     level: learn.getLevel(),
     language: learn.getLanguage(),
-    isNew: learn.getIsNew(),
+    isFeatured: learn.getIsNew(),
     isShow: learn.getIsShow()
   }
 }
@@ -29,7 +29,7 @@ export function learnToDto(learn: LearnEntity): ILearn {
     image: learn.getImage(),
     level: learn.getLevel(),
     language: learn.getLanguage(),
-    isNew: learn.getIsNew(),
+    isFeatured: learn.getIsNew(),
     isShow: learn.getIsShow()
   }
 }

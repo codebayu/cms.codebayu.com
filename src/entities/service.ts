@@ -1,6 +1,6 @@
 import { ZodError, z } from 'zod'
 import { IService } from '@/use-cases/services/types'
-import { EntityValidationError } from './utils'
+import { EntityValidationError } from '@/utils/error'
 
 export type ServiceValidatedFields = 'tag' | 'title' | 'description'
 

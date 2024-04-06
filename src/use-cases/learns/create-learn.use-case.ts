@@ -25,7 +25,7 @@ export async function createLearnUseCase(
       slug: data.slug,
       level: data.level,
       language: data.language,
-      isNew: data.isNew,
+      isFeatured: data.isFeatured,
       isShow: data.isShow
     })
     await context.createLearn(learnToCreateCareerDtoMapper(newLearn))

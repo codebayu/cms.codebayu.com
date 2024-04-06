@@ -60,6 +60,6 @@ model Learn {
   image         String
   level         String
   language      String
-  isNew         Boolean
+  isFeatured    Boolean
   isShow        Boolean
 }

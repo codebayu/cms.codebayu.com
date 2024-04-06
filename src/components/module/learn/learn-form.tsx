@@ -9,9 +9,10 @@ import useActionForm from '@/hooks/forms/useActionForm'
 import { languageOptions, learnDefaultValueForm, levelOptions } from '@/constants/learn'
 import SelectOptions from '@/components/elements/select-options'
 import SubmitButton from '@/components/elements/submit-button'
+import SwitchCard from '@/components/elements/switch-card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
 
 export default function LearnForm() {
   const { copyButtonIdle, copyButtonSubmitting, form, formType, isPending, onSubmit } = useActionForm<
@@ -51,19 +52,6 @@ export default function LearnForm() {
               />
               <FormField
                 control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Learn Typescript" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="image"
                 render={({ field }) => (
                   <FormItem>
@@ -75,34 +63,6 @@ export default function LearnForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="isNew"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-x-2">
-                    <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} className="m-0" />
-                    </FormControl>
-                    <FormLabel className="!mt-0">Is New</FormLabel>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="isShow"
-                render={({ field }) => (
-                  <FormItem className="flex items-center space-x-2">
-                    <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} className="m-0" />
-                    </FormControl>
-                    <FormLabel className="!mt-0">Is Show</FormLabel>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex min-w-80 flex-1 flex-col space-y-2">
               <FormField
                 control={form.control}
                 name="level"
@@ -127,6 +87,43 @@ export default function LearnForm() {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex min-w-80 flex-1 flex-col space-y-2">
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Learn Typescript" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="isFeatured"
+                render={({ field }) => (
+                  <SwitchCard
+                    field={field}
+                    title="Mark as featured"
+                    description="Set to true will display the badge component."
+                  />
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="isShow"
+                render={({ field }) => (
+                  <SwitchCard
+                    field={field}
+                    title="Mark as show"
+                    description="Set to false will hide the card from list."
+                  />
                 )}
               />
             </div>

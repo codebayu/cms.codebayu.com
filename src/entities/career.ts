@@ -1,6 +1,6 @@
 import { ZodError, z } from 'zod'
 import { ICareer } from '@/use-cases/careers/types'
-import { EntityValidationError } from './utils'
+import { EntityValidationError } from '@/utils/error'
 
 export type CareerValidatedFields =
   | 'position'

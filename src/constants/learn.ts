@@ -8,7 +8,7 @@ export const learnDefaultValueForm: ICreateLearnDto = {
   language: 'typescript',
   level: 'easy',
   slug: generateRandomString(10),
-  isNew: false,
+  isFeatured: false,
   isShow: false
 }
 

@@ -36,7 +36,7 @@ export function toLearnDtoMapper(learn: ILearn) {
     slug: learn.slug,
     level: learn.level,
     language: learn.language,
-    isNew: learn.isNew,
+    isFeatured: learn.isFeatured,
     isShow: learn.isShow
   }
 }

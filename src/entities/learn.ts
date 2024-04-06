@@ -1,6 +1,6 @@
 import { ZodError, z } from 'zod'
 import { ILearn } from '@/use-cases/learns/types'
-import { EntityValidationError } from './utils'
+import { EntityValidationError } from '@/utils/error'
 
 export type LearnValidatedFields =
   | 'title'
@@ -9,7 +9,7 @@ export type LearnValidatedFields =
   | 'image'
   | 'level'
   | 'language'
-  | 'isNew'
+  | 'isFeatured'
   | 'isShow'
 
 export class LearnEntityValidationError extends EntityValidationError<LearnValidatedFields> {}
@@ -21,7 +21,7 @@ export const learnSchema = z.object({
   image: z.string().min(1),
   level: z.string().min(1),
   language: z.string().min(1),
-  isNew: z.boolean(),
+  isFeatured: z.boolean(),
   isShow: z.boolean()
 })
 
@@ -33,10 +33,10 @@ export class LearnEntity {
   private image: string
   private level: string
   private language: string
-  private isNew: boolean
+  private isFeatured: boolean
   private isShow: boolean
 
-  constructor({ id, title, description, slug, image, level, language, isNew, isShow }: ILearn) {
+  constructor({ id, title, description, slug, image, level, language, isFeatured, isShow }: ILearn) {
     this.id = id
     this.title = title
     this.description = description
@@ -44,7 +44,7 @@ export class LearnEntity {
     this.image = image
     this.level = level
     this.language = language
-    this.isNew = isNew
+    this.isFeatured = isFeatured
     this.isShow = isShow
 
     this.validate()
@@ -79,7 +79,7 @@ export class LearnEntity {
   }
 
   getIsNew() {
-    return this.isNew
+    return this.isFeatured
   }
 
   getIsShow() {
@@ -99,7 +99,7 @@ export class LearnEntity {
         image: errors.image?.[0],
         level: errors.level?.[0],
         language: errors.language?.[0],
-        isNew: errors.isNew?.[0],
+        isFeatured: errors.isFeatured?.[0],
         isShow: errors.isShow?.[0]
       })
     }

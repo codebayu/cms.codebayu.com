@@ -38,7 +38,7 @@ export async function updateLearnUseCase(
       image: data.image,
       level: data.level,
       language: data.language,
-      isNew: data.isNew,
+      isFeatured: data.isFeatured,
       isShow: data.isShow
     })
     await context.updateLearn(learnToDto(newLearn))

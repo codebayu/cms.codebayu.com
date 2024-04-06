@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
-import { GithubRepository } from '@/constants/nav'
+import { githubRepository } from '@/constants/nav'
 
 export default async function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default async function HomePage() {
         <h1 className="mr-2 text-4xl font-bold text-neutral-800">Hi!</h1>
         <p className="mb-6 text-neutral-700">sorry but only the authenticated users can enjoy the CMS site :v</p>
 
-        <Link href={GithubRepository} target="_blank">
+        <Link href={githubRepository} target="_blank">
           <GitHubLogoIcon width="25" height="25" />
         </Link>
       </div>

@@ -6,7 +6,7 @@ export type ILearn = {
   slug: string
   level: string
   language: string
-  isNew: boolean
+  isFeatured: boolean
   isShow: boolean
 }
 
@@ -17,7 +17,7 @@ export type ICreateLearnDto = {
   slug: string
   level: string
   language: string
-  isNew: boolean
+  isFeatured: boolean
   isShow: boolean
 }
 

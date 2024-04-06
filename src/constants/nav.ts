@@ -7,4 +7,4 @@ export const navItems = [
   { name: 'Promotion', href: '/promotion', segment: 'promotion', protected: true }
 ]
 
-export const GithubRepository = 'https://github.com/codebayu/cms.codebayu.com'
+export const githubRepository = 'https://github.com/codebayu/cms.codebayu.com'
