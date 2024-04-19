@@ -18,16 +18,7 @@ export async function createLearnUseCase(
   }
 
   try {
-    const newLearn = new LearnEntity({
-      title: data.title,
-      description: data.description,
-      image: data.image,
-      slug: data.slug,
-      level: data.level,
-      language: data.language,
-      isFeatured: data.isFeatured,
-      isShow: data.isShow
-    })
+    const newLearn = new LearnEntity({ ...data })
     await context.createLearn(learnToCreateCareerDtoMapper(newLearn))
   } catch (err) {
     const error = err as LearnEntityValidationError

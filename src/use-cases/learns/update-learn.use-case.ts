@@ -30,17 +30,7 @@ export async function updateLearnUseCase(
   }
 
   try {
-    const newLearn = new LearnEntity({
-      id: data.id,
-      slug: data.slug,
-      title: data.title,
-      description: data.description,
-      image: data.image,
-      level: data.level,
-      language: data.language,
-      isFeatured: data.isFeatured,
-      isShow: data.isShow
-    })
+    const newLearn = new LearnEntity({ ...data })
     await context.updateLearn(learnToDto(newLearn))
   } catch (err) {
     const error = err as LearnEntityValidationError

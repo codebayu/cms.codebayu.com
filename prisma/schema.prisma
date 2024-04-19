@@ -22,13 +22,13 @@ model Project {
   slug        String   @unique
   description String
   image       String
-  linkDemo    String?
-  linkGithub  String?
+  linkDemo    String
+  linkGithub  String
   stacks      String[]
-  isShow      Boolean  @default(true)
-  updatedAt   DateTime @default(now())
-  content     String?  @db.Text
-  isFeatured  Boolean  @default(false)
+  isShow      Boolean 
+  updatedAt   DateTime
+  content     String    @db.Text
+  isFeatured  Boolean 
 }
 
 model Career {

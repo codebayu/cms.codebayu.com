@@ -14,6 +14,7 @@ export default function useActionCell<T extends { id?: string | undefined }>({
 }) {
   const { setFormType, setDefaultValueForm } = useFormStore<T>()
   const { showDialog, setContent } = useDialogStore()
+
   function handleEdit() {
     setDefaultValueForm(cell.row.original)
     setFormType('update')

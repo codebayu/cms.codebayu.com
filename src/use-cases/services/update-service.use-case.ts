@@ -29,12 +29,7 @@ export async function updateServiceUseCase(
   }
 
   try {
-    const newService = new ServiceEntity({
-      id: data.id,
-      title: data.title,
-      description: data.description,
-      tag: data.tag
-    })
+    const newService = new ServiceEntity({ ...data })
     await context.updateService(serviceToDto(newService))
   } catch (err) {
     const error = err as ServiceEntityValidationError

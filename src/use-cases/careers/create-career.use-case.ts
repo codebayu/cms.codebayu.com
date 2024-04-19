@@ -18,18 +18,7 @@ export async function createCareerUseCase(
   }
 
   try {
-    const newCareer = new CareerEntity({
-      position: data.position,
-      company: data.company,
-      logo: data.logo,
-      location: data.location,
-      locationType: data.locationType,
-      type: data.type,
-      startDate: data.startDate,
-      endDate: data.endDate,
-      link: data.link,
-      slug: data.slug
-    })
+    const newCareer = new CareerEntity({ ...data })
     await context.createCareer(careerToCreateCareerDtoMapper(newCareer))
   } catch (err) {
     const error = err as CareerEntityValidationError

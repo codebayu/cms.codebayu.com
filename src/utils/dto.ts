@@ -1,5 +1,6 @@
 import { ICareer } from '@/use-cases/careers/types'
 import { ILearn } from '@/use-cases/learns/types'
+import { IProject } from '@/use-cases/projects/types'
 import { IService } from '@/use-cases/services/types'
 
 export function toCareerDtoMapper(career: ICareer) {
@@ -38,5 +39,22 @@ export function toLearnDtoMapper(learn: ILearn) {
     language: learn.language,
     isFeatured: learn.isFeatured,
     isShow: learn.isShow
+  }
+}
+
+export function toProjectDtoMapper(project: IProject) {
+  return {
+    id: project.id,
+    title: project.title,
+    description: project.description,
+    image: project.image,
+    content: project.content,
+    slug: project.slug,
+    isFeatured: project.isFeatured,
+    isShow: project.isShow,
+    stacks: project.stacks,
+    // updatedAt: project.updatedAt,
+    linkDemo: project.linkDemo,
+    linkGithub: project.linkGithub
   }
 }

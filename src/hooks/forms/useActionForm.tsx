@@ -34,6 +34,9 @@ export default function useActionForm<T, D>({
     values: defaultValueForm
   })
 
+  const copyButtonIdle = formType === 'create' ? 'Create' : 'Update'
+  const copyButtonSubmitting = formType === 'create' ? `Creating new ${title}...` : `Updating ${title}...`
+
   async function onSubmit(data: T | WithId<T>) {
     startTransition(async () => {
       if (formType === 'create') {
@@ -73,9 +76,6 @@ export default function useActionForm<T, D>({
       description: `You have successfully update the ${title}.`
     })
   }
-
-  const copyButtonIdle = formType === 'create' ? 'Create' : 'Update'
-  const copyButtonSubmitting = formType === 'create' ? `Creating new ${title}...` : `Updating ${title}...`
 
   return { form, formType, formRef, isPending, onSubmit, copyButtonIdle, copyButtonSubmitting, defaultValueForm }
 }

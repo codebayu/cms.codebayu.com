@@ -18,11 +18,7 @@ export async function createServiceUseCase(
   }
 
   try {
-    const newService = new ServiceEntity({
-      title: data.title,
-      description: data.description,
-      tag: data.tag
-    })
+    const newService = new ServiceEntity({ ...data })
     await context.createService(serviceToCreateCareerDtoMapper(newService))
   } catch (err) {
     const error = err as ServiceEntityValidationError
