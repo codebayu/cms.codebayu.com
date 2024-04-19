@@ -1,7 +1,7 @@
 import { LearnEntity } from '@/entities/learn'
 import { ICreateLearnDto, ILearn } from './types'
 
-export function learnToCreateCareerDtoMapper(learn: LearnEntity): ICreateLearnDto {
+export function learnToCreateLearnDtoMapper(learn: LearnEntity): ICreateLearnDto {
   return {
     title: learn.getTitle(),
     description: learn.getDescription(),
