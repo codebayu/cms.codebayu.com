@@ -33,7 +33,8 @@ export const projectSchema = z.object({
   linkGithub: z.string().min(1),
   stacks: z.array(z.string()).refine(value => value.some(item => item), {
     message: 'You have to select at least one item.'
-  })
+  }),
+  updatedAt: z.date()
 })
 
 export class ProjectEntity {
@@ -44,8 +45,8 @@ export class ProjectEntity {
   private isFeatured: boolean
   private isShow: boolean
   private slug: string
-  private stacks?: string[]
-  private updatedAt?: Date
+  private stacks: string[]
+  private updatedAt: Date
   private content: string
   private linkDemo: string
   private linkGithub: string

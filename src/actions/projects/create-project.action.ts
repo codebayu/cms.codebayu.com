@@ -12,7 +12,6 @@ import { projectDefaultValueForm } from '@/constants/project'
 export async function createProjectAction(formData: ICreateProjectDto): Promise<CreateItemState<ICreateProjectDto>> {
   const { getUser } = await auth()
   try {
-    console.log({ formData })
     await createProjectUseCase({ getUser, createProject }, { ...formData })
     revalidatePath('/project')
     return {

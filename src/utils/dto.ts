@@ -53,7 +53,7 @@ export function toProjectDtoMapper(project: IProject) {
     isFeatured: project.isFeatured,
     isShow: project.isShow,
     stacks: project.stacks,
-    // updatedAt: project.updatedAt,
+    updatedAt: project.updatedAt,
     linkDemo: project.linkDemo,
     linkGithub: project.linkGithub
   }

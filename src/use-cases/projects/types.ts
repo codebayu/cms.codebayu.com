@@ -8,7 +8,7 @@ export type IProject = {
   linkGithub: string
   stacks: string[]
   isShow: boolean
-  updatedAt?: Date
+  updatedAt: Date
   content: string
   isFeatured: boolean
 }
@@ -24,7 +24,7 @@ export type ICreateProjectDto = {
   isShow: boolean
   content: string
   isFeatured: boolean
-  updatedAt?: Date
+  updatedAt: Date
 }
 
 export type CreateProject = (project: ICreateProjectDto) => void

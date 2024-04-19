@@ -11,7 +11,8 @@ export const projectDefaultValueForm: ICreateProjectDto = {
   stacks: [],
   content: '',
   linkDemo: '',
-  linkGithub: ''
+  linkGithub: '',
+  updatedAt: new Date()
 }
 
 export const stackOptions = [
