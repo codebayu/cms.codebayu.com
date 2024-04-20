@@ -63,3 +63,12 @@ model Learn {
   isFeatured    Boolean
   isShow        Boolean
 }
+
+model Promotion {
+  id            String  @unique @default(cuid()) @id
+  text          String
+  image         String
+  link          String
+  isShow        Boolean
+  showingOn     String[]
+}

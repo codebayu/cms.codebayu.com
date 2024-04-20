@@ -2,7 +2,7 @@ import { LearnEntity, LearnEntityValidationError } from '@/entities/learn'
 import { AuthenticationError, ValidationError } from '@/utils/error'
 import { GetUser } from '../users/types'
 import { CreateLearn, ICreateLearnDto } from './types'
-import { learnToCreateCareerDtoMapper } from './utils'
+import { learnToCreateLearnDtoMapper } from './utils'
 
 export async function createLearnUseCase(
   context: {
@@ -19,7 +19,7 @@ export async function createLearnUseCase(
 
   try {
     const newLearn = new LearnEntity({ ...data })
-    await context.createLearn(learnToCreateCareerDtoMapper(newLearn))
+    await context.createLearn(learnToCreateLearnDtoMapper(newLearn))
   } catch (err) {
     const error = err as LearnEntityValidationError
     throw new ValidationError(error.getErrors())
