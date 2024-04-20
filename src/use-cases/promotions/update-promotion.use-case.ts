@@ -22,9 +22,9 @@ export async function updatePromotionUseCase(
     throw new Error('use-case: expected promotion to have an id')
   }
 
-  const existingCareer = await context.getPromotion(data.id)
+  const existingPromotion = await context.getPromotion(data.id)
 
-  if (!existingCareer) {
+  if (!existingPromotion) {
     throw new Error('use-case: no promotion found')
   }
 

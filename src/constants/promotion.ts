@@ -7,3 +7,18 @@ export const promotionDefaultValueForm: ICreatePromotionDto = {
   link: '',
   showingOn: []
 }
+
+export const pageOptions = [
+  {
+    id: '/',
+    label: 'Home'
+  },
+  {
+    id: '/roadmap',
+    label: 'Roadmap'
+  },
+  {
+    id: '/me',
+    label: 'Me'
+  }
+] as const
