@@ -7,7 +7,7 @@ export type ICareer = {
   locationType: string
   type: string
   startDate: Date
-  endDate: Date
+  endDate: Date | null
   link: string
   slug: string
 }
@@ -20,7 +20,7 @@ export type ICreateCareerDto = {
   locationType: string
   type: string
   startDate: Date
-  endDate: Date
+  endDate: Date | null
   link: string
   slug: string
 }

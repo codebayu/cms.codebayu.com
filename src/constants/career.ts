@@ -22,7 +22,7 @@ export const careerDefaultValueForm = {
   locationType: 'on-site',
   type: 'full-time',
   startDate: new Date(),
-  endDate: new Date(),
+  endDate: null,
   logo: '',
   slug: generateRandomString(10)
 }
