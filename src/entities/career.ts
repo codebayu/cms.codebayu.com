@@ -23,7 +23,7 @@ export const careerSchema = z.object({
   locationType: z.string().min(1),
   type: z.string().min(1),
   startDate: z.date(),
-  endDate: z.date(),
+  endDate: z.date().nullable(),
   link: z.string().min(1),
   slug: z.string().min(1)
 })
@@ -37,7 +37,7 @@ export class CareerEntity {
   private locationType: string
   private type: string
   private startDate: Date
-  private endDate: Date
+  private endDate: Date | null
   private link: string
   private slug: string
 
