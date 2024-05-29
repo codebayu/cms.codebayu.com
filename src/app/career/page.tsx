@@ -1,12 +1,12 @@
-import { getCareers } from '@/data-access/careers/get-careers.persistence'
-import Greet from '@/components/elements/greet'
-import CareerTable from '@/components/module/career/career-table'
+import { CareerUseCase } from '@/usecase/career'
+import CareerTable from './component/career-table'
 
-export default async function CareerPage() {
-  const careers = await getCareers()
+export default async function CareerPage({ searchParams }: { searchParams?: { page?: string } }) {
+  const page = Number(searchParams?.page) || 1
+  const usecase = new CareerUseCase()
+  const careers = await usecase.getAllCareer({ page })
   return (
     <div className="flex w-full flex-col justify-center">
-      <Greet />
       <CareerTable careers={careers} />
     </div>
   )

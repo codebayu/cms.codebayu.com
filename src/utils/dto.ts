@@ -1,8 +1,8 @@
-import { ICareer } from '@/use-cases/careers/types'
-import { ILearn } from '@/use-cases/learns/types'
-import { IProject } from '@/use-cases/projects/types'
-import { IPromotion } from '@/use-cases/promotions/types'
-import { IService } from '@/use-cases/services/types'
+import { ICareer } from '@/constants/career'
+import { ILearn } from '@/constants/learn'
+import { IProject } from '@/constants/project'
+import { IPromotion } from '@/constants/promotion'
+import { IService } from '@/constants/service'
 
 export function toCareerDtoMapper(career: ICareer) {
   return {

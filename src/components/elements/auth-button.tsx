@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn, signOut } from 'next-auth/react'
-import { User } from '@/use-cases/users/types'
+import { User } from '@/constants/user'
 import { Button } from '../ui/button'
 
 export default function AuthButton({ user }: { user: User }) {

@@ -2,11 +2,9 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
-import { User } from '@/use-cases/users/types'
-import { auth } from '@/lib/auth'
+import { getUserSession } from '@/lib/auth'
 import { cn } from '@/lib/utils'
-import Navigation from '@/components/layouts/navigation'
-import { Toaster } from '@/components/ui/toaster'
+import Sidebar from '@/components/elements/sidebar'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,13 +20,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { getUser } = await auth()
-  const user = getUser()
+  const session = await getUserSession()
   return (
     <>
       <html lang="en">
         <head />
-        <body className={cn('min-h-screen bg-neutral-50 font-sans text-slate-900 antialiased', inter.className)}>
+        <body className={cn('flex', inter.className)}>
           <NextTopLoader
             color="#05b6d3"
             initialPosition={0.08}
@@ -40,11 +37,18 @@ export default async function RootLayout({
             speed={200}
             shadow="0 0 10px #05b6d3,0 0 5px #45c6c0"
           />
-          <main className="relative flex min-h-screen flex-col">
-            <Navigation user={user as User} />
-            <div className="flex flex-1 p-2 md:px-32 md:py-20">{children}</div>
-            <Toaster />
-            <GlobalDialog />
+          <GlobalDialog />
+          <Sidebar />
+          <main className="relative flex min-h-screen w-full flex-col bg-[#F9FAFF] dark:bg-neutral-900 dark:text-neutral-200">
+            <div className="p-16">
+              <div className="flex gap-2 text-2xl font-medium">
+                <h2 className="pb-8 text-2xl font-medium capitalize text-neutral-800 dark:text-neutral-200">
+                  Hello {session?.user.name}
+                </h2>
+                <div className="animate-waving-hand">👋</div>
+              </div>
+              {children}
+            </div>
           </main>
         </body>
       </html>
