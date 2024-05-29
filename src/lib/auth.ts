@@ -1,11 +1,10 @@
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next'
 import { unstable_noStore } from 'next/cache'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { AuthOptions, DefaultSession, getServerSession } from 'next-auth'
 import { Adapter } from 'next-auth/adapters'
 import Credentials from 'next-auth/providers/credentials'
-import { User } from '@/use-cases/users/types'
 import { prisma } from '@/lib/prisma'
+import { AuthenticationError } from '@/utils/error'
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -77,10 +76,14 @@ export const authConfig = {
   }
 } satisfies AuthOptions
 
-export async function auth(
-  ...args: [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']] | [NextApiRequest, NextApiResponse] | []
-) {
+export async function getUserSession() {
   unstable_noStore()
-  const session = await getServerSession(...args, authConfig)
-  return { getUser: () => session?.user && ({ userId: session.user.id } as User) }
+  const session = await getServerSession(authConfig)
+  return session
+}
+
+export async function checkPermission() {
+  const session = await getUserSession()
+  if (!session) throw new AuthenticationError()
+  return session
 }

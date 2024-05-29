@@ -1,8 +1,10 @@
-import { getLearns } from '@/data-access/learns/get-learns.persistence'
-import LearnTable from '@/components/module/learn/learn-table'
+import { LearnUseCase } from '@/usecase/learn'
+import LearnTable from './component/learn-table'
 
-export default async function LearnPage() {
-  const learns = await getLearns()
+export default async function LearnPage({ searchParams }: { searchParams?: { page?: string } }) {
+  const page = Number(searchParams?.page) || 1
+  const usecase = new LearnUseCase()
+  const learns = await usecase.getAllLearn({ page })
   return (
     <div className="flex w-full justify-center">
       <LearnTable learns={learns} />
