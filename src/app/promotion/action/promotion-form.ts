@@ -2,14 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { PromotionUseCase } from '@/usecase/promotion'
-import { CreateItemState } from '@/types/actions'
-import { ICreatePromotionDto, IPromotion } from '@/constants/promotion'
+import { ActionItemState } from '@/types/actions'
+import { IPromotionPayloadCreate, IPromotionPayloadUpdate } from '@/constants/promotion'
 
 const usecase = new PromotionUseCase()
 
 export async function createPromotionAction(
-  formData: ICreatePromotionDto
-): Promise<CreateItemState<ICreatePromotionDto>> {
+  formData: IPromotionPayloadCreate
+): Promise<ActionItemState<IPromotionPayloadCreate>> {
   try {
     const data = await usecase.createPromotion(formData)
     revalidatePath('/promotion')
@@ -27,7 +27,9 @@ export async function createPromotionAction(
   }
 }
 
-export async function updatePromotionAction(formData: IPromotion): Promise<CreateItemState<IPromotion>> {
+export async function updatePromotionAction(
+  formData: IPromotionPayloadUpdate
+): Promise<ActionItemState<IPromotionPayloadUpdate>> {
   try {
     const data = await usecase.updatePromotion(formData)
     revalidatePath('/promotion')

@@ -5,6 +5,10 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { checkPermission } from '@/lib/auth'
 import { PrismaError } from '@/utils/error'
 
+type ExpludeField = 'createdAt'
+type ProjectCreateInput = Omit<Prisma.ProjectCreateInput, ExpludeField>
+type ProjectUncheckedCreateInput = Omit<Prisma.ProjectUncheckedCreateInput, ExpludeField>
+
 export class ProjectUseCase {
   private readonly repository: ProjectRepository
 
@@ -17,7 +21,8 @@ export class ProjectUseCase {
       const offset = (page - 1) * ITEM_PER_PAGE
       const projects = await this.repository.findMany({
         skip: offset,
-        take: ITEM_PER_PAGE
+        take: ITEM_PER_PAGE,
+        orderBy: { createdAt: 'desc' }
       })
       return projects
     } catch (err) {
@@ -36,10 +41,10 @@ export class ProjectUseCase {
     }
   }
 
-  async createProject(career: Prisma.XOR<Prisma.ProjectCreateInput, Prisma.ProjectUncheckedCreateInput>) {
+  async createProject(project: Prisma.XOR<ProjectCreateInput, ProjectUncheckedCreateInput>) {
     await checkPermission()
     try {
-      const data = await this.repository.create({ data: career })
+      const data = await this.repository.create({ data: { ...project, createdAt: new Date() } })
       return data
     } catch (err) {
       const error = err as PrismaClientKnownRequestError
@@ -47,17 +52,17 @@ export class ProjectUseCase {
     }
   }
 
-  async updateProject(career: Prisma.XOR<Prisma.ProjectUpdateInput, Prisma.ProjectUncheckedUpdateInput>) {
+  async updateProject(project: Prisma.XOR<Prisma.ProjectUpdateInput, Prisma.ProjectUncheckedUpdateInput>) {
     await checkPermission()
 
-    if (typeof career.id !== 'string') {
+    if (typeof project.id !== 'string') {
       throw new Error('use-case: expected product to have an id of type string')
     }
 
     try {
       const data = await this.repository.update({
-        where: { id: career.id },
-        data: career
+        where: { id: project.id },
+        data: project
       })
       return data
     } catch (err) {

@@ -2,8 +2,8 @@
 
 import useActionForm from '@/hooks/forms/useActionForm'
 import {
-  ICareer,
-  ICreateCareerDto,
+  ICareerPayloadCreate,
+  ICareerPayloadUpdate,
   careerDefaultValueForm,
   careerSchema,
   locationsTypeOptions,
@@ -18,8 +18,8 @@ import { createCareerAction, updateCareerAction } from '../action/career-form'
 
 export default function CareerForm() {
   const { copyButtonIdle, copyButtonSubmitting, form, formType, defaultValueForm, isPending, onSubmit } = useActionForm<
-    ICareer,
-    ICreateCareerDto
+    ICareerPayloadCreate,
+    ICareerPayloadUpdate
   >({
     title: 'career',
     schema: careerSchema,

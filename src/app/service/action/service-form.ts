@@ -2,12 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { ServiceUseCase } from '@/usecase/service'
-import { CreateItemState } from '@/types/actions'
-import { ICreateServiceDto, IService } from '@/constants/service'
+import { ActionItemState } from '@/types/actions'
+import { IServicePayloadCreate, IServicePayloadUpdate } from '@/constants/service'
 
 const usecase = new ServiceUseCase()
 
-export async function createServiceAction(formData: IService): Promise<CreateItemState<ICreateServiceDto>> {
+export async function createServiceAction(
+  formData: IServicePayloadCreate
+): Promise<ActionItemState<IServicePayloadCreate>> {
   try {
     const data = await usecase.createService(formData)
     revalidatePath('/service')
@@ -25,7 +27,9 @@ export async function createServiceAction(formData: IService): Promise<CreateIte
   }
 }
 
-export async function updateServiceAction(formData: IService): Promise<CreateItemState<IService>> {
+export async function updateServiceAction(
+  formData: IServicePayloadUpdate
+): Promise<ActionItemState<IServicePayloadUpdate>> {
   try {
     const data = await usecase.updateService(formData)
     revalidatePath('/service')

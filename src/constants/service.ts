@@ -3,7 +3,9 @@ import { z } from 'zod'
 export const serviceDefaultValueForm = {
   title: '',
   description: '',
-  tag: ''
+  tag: '',
+  createdAt: new Date(),
+  updatedAt: null
 }
 
 export type IService = {
@@ -11,18 +13,17 @@ export type IService = {
   title: string
   description: string
   tag: string
+  createdAt: Date
+  updatedAt: Date | null
 }
 
-export type ICreateServiceDto = {
+export type IServicePayloadCreate = {
   title: string
   description: string
   tag: string
 }
 
-export type CreateService = (career: ICreateServiceDto) => void
-export type DeleteService = (careerId: string) => void
-export type UpdateService = (career: IService) => void
-export type GetService = (careerId: string) => Promise<IService>
+export type IServicePayloadUpdate = { id: string } & IServicePayloadCreate
 
 export const serviceSchema = z.object({
   tag: z.string().min(1),

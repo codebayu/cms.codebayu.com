@@ -5,6 +5,10 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { checkPermission } from '@/lib/auth'
 import { PrismaError } from '@/utils/error'
 
+type ExpludeField = 'createdAt'
+type PromotionCreateInput = Omit<Prisma.PromotionCreateInput, ExpludeField>
+type PromotionUncheckedCreateInput = Omit<Prisma.PromotionUncheckedCreateInput, ExpludeField>
+
 export class PromotionUseCase {
   private readonly repository: PromotionRepository
 
@@ -17,7 +21,8 @@ export class PromotionUseCase {
       const offset = (page - 1) * ITEM_PER_PAGE
       const promotions = await this.repository.findMany({
         skip: offset,
-        take: ITEM_PER_PAGE
+        take: ITEM_PER_PAGE,
+        orderBy: { createdAt: 'desc' }
       })
       return promotions
     } catch (err) {
@@ -46,10 +51,10 @@ export class PromotionUseCase {
     }
   }
 
-  async createPromotion(career: Prisma.XOR<Prisma.PromotionCreateInput, Prisma.PromotionUncheckedCreateInput>) {
+  async createPromotion(promotion: Prisma.XOR<PromotionCreateInput, PromotionUncheckedCreateInput>) {
     await checkPermission()
     try {
-      const data = await this.repository.create({ data: career })
+      const data = await this.repository.create({ data: { ...promotion, createdAt: new Date() } })
       return data
     } catch (err) {
       const error = err as PrismaClientKnownRequestError
@@ -57,17 +62,17 @@ export class PromotionUseCase {
     }
   }
 
-  async updatePromotion(career: Prisma.XOR<Prisma.PromotionUpdateInput, Prisma.PromotionUncheckedUpdateInput>) {
+  async updatePromotion(promotion: Prisma.XOR<Prisma.PromotionUpdateInput, Prisma.PromotionUncheckedUpdateInput>) {
     await checkPermission()
 
-    if (typeof career.id !== 'string') {
+    if (typeof promotion.id !== 'string') {
       throw new Error('use-case: expected product to have an id of type string')
     }
 
     try {
       const data = await this.repository.update({
-        where: { id: career.id },
-        data: career
+        where: { id: promotion.id },
+        data: promotion
       })
       return data
     } catch (err) {

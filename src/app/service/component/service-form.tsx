@@ -1,7 +1,12 @@
 'use client'
 
 import useActionForm from '@/hooks/forms/useActionForm'
-import { ICreateServiceDto, IService, serviceDefaultValueForm, serviceSchema } from '@/constants/service'
+import {
+  IServicePayloadCreate,
+  IServicePayloadUpdate,
+  serviceDefaultValueForm,
+  serviceSchema
+} from '@/constants/service'
 import SubmitButton from '@/components/elements/submit-button'
 import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -10,7 +15,7 @@ import { createServiceAction, updateServiceAction } from '../action/service-form
 
 export default function ServiceForm() {
   const { form, formRef, onSubmit, copyButtonIdle, copyButtonSubmitting, formType, defaultValueForm, isPending } =
-    useActionForm<IService, ICreateServiceDto>({
+    useActionForm<IServicePayloadCreate, IServicePayloadUpdate>({
       title: 'service',
       schema: serviceSchema,
       createAction: createServiceAction,

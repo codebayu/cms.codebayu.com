@@ -25,7 +25,9 @@ export const careerDefaultValueForm = {
   startDate: new Date(),
   endDate: null,
   logo: '',
-  slug: generateRandomString(10)
+  slug: generateRandomString(10),
+  createdAt: new Date(),
+  updatedAt: null
 }
 
 export type ICareer = {
@@ -40,9 +42,11 @@ export type ICareer = {
   endDate: Date | null
   link: string
   slug: string
+  createdAt: Date
+  updatedAt: Date | null
 }
 
-export type ICreateCareerDto = {
+export type ICareerPayloadCreate = {
   position: string
   company: string
   logo: string
@@ -55,10 +59,7 @@ export type ICreateCareerDto = {
   slug: string
 }
 
-export type CreateCareer = (career: ICreateCareerDto) => void
-export type DeleteCareer = (careerId: string) => void
-export type UpdateCareer = (career: ICareer) => void
-export type GetCareer = (careerId: string) => Promise<ICareer>
+export type ICareerPayloadUpdate = { id: string } & ICareerPayloadCreate
 
 export const careerSchema = z.object({
   position: z.string().min(1),

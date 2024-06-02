@@ -2,12 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { ProjectUseCase } from '@/usecase/project'
-import { CreateItemState } from '@/types/actions'
-import { ICreateProjectDto, IProject } from '@/constants/project'
+import { ActionItemState } from '@/types/actions'
+import { IProjectPayloadCreate, IProjectPayloadUpdate } from '@/constants/project'
 
 const usecase = new ProjectUseCase()
 
-export async function createProjectAction(formData: ICreateProjectDto): Promise<CreateItemState<ICreateProjectDto>> {
+export async function createProjectAction(
+  formData: IProjectPayloadCreate
+): Promise<ActionItemState<IProjectPayloadCreate>> {
   try {
     const data = await usecase.createProject(formData)
     revalidatePath('/project')
@@ -25,7 +27,9 @@ export async function createProjectAction(formData: ICreateProjectDto): Promise<
   }
 }
 
-export async function updateProjectAction(formData: IProject): Promise<CreateItemState<IProject>> {
+export async function updateProjectAction(
+  formData: IProjectPayloadUpdate
+): Promise<ActionItemState<IProjectPayloadUpdate>> {
   try {
     const data = await usecase.updateProject(formData)
     revalidatePath('/project')

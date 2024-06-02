@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { generateRandomString } from '@/utils/functions'
 
-export const projectDefaultValueForm: ICreateProjectDto = {
+export const projectDefaultValueForm = {
   slug: generateRandomString(10),
   title: '',
   description: '',
@@ -12,7 +12,8 @@ export const projectDefaultValueForm: ICreateProjectDto = {
   content: '',
   linkDemo: '',
   linkGithub: '',
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  createdAt: new Date()
 }
 
 export const stackOptions = [
@@ -116,12 +117,13 @@ export type IProject = {
   linkGithub: string
   stacks: string[]
   isShow: boolean
-  updatedAt: Date
   content: string
   isFeatured: boolean
+  createdAt: Date
+  updatedAt: Date | null
 }
 
-export type ICreateProjectDto = {
+export type IProjectPayloadCreate = {
   title: string
   slug: string
   description: string
@@ -132,13 +134,9 @@ export type ICreateProjectDto = {
   isShow: boolean
   content: string
   isFeatured: boolean
-  updatedAt: Date
 }
 
-export type CreateProject = (project: ICreateProjectDto) => void
-export type DeleteProject = (projectId: string) => void
-export type UpdateProject = (project: IProject) => void
-export type GetProject = (projectId: string) => Promise<IProject>
+export type IProjectPayloadUpdate = { id: string } & IProjectPayloadCreate
 
 export const projectSchema = z.object({
   title: z.string().min(1),
@@ -152,6 +150,5 @@ export const projectSchema = z.object({
   linkGithub: z.string().min(1),
   stacks: z.array(z.string()).refine(value => value.some(item => item), {
     message: 'You have to select at least one item.'
-  }),
-  updatedAt: z.date()
+  })
 })

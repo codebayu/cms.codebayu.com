@@ -13,7 +13,9 @@ const getCareers = (): Prisma.CareerCreateInput[] => [
     startDate: new Date(),
     endDate: new Date(),
     link: 'www.google.com',
-    slug: 'google'
+    slug: 'google',
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ]
 

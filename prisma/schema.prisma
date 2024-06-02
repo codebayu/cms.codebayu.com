@@ -6,69 +6,80 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL") // uses connection pooling
+  url      = env("DATABASE_URL") // uses connection pooling
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  name          String
-  email         String   @unique
-  password      String
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt @db.Timestamp(3)
 }
 
 model Project {
-  id          String   @unique    @default(cuid()) @id
+  id          String    @id @unique @default(cuid())
   title       String
-  slug        String   @unique
+  slug        String    @unique
   description String
   image       String
   linkDemo    String
   linkGithub  String
   stacks      String[]
-  isShow      Boolean 
-  updatedAt   DateTime
+  isShow      Boolean
+  updatedAt   DateTime? @updatedAt @db.Timestamp(3)
   content     String    @db.Text
-  isFeatured  Boolean 
+  isFeatured  Boolean
+  createdAt   DateTime  @default(now())
 }
 
 model Career {
-  id            String   @unique    @default(cuid()) @id
-  position      String
-  company       String
-  logo          String
-  location      String
-  locationType  String
-  type          String
-  startDate     DateTime 
-  endDate       DateTime?
-  link          String  
-  slug          String    @unique
+  id           String    @id @unique @default(cuid())
+  position     String
+  company      String
+  logo         String
+  location     String
+  locationType String
+  type         String
+  startDate    DateTime
+  endDate      DateTime?
+  link         String
+  slug         String    @unique
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt @db.Timestamp(3)
 }
 
 model Service {
-  id          String  @unique @default(cuid()) @id
+  id          String    @id @unique @default(cuid())
   tag         String
   title       String
   description String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt @db.Timestamp(3)
 }
 
 model Learn {
-  id            String  @unique @default(cuid()) @id
-  title         String
-  description   String
-  slug          String    @unique
-  image         String
-  level         String
-  language      String
-  isFeatured    Boolean
-  isShow        Boolean
+  id          String    @id @unique @default(cuid())
+  title       String
+  description String
+  slug        String    @unique
+  image       String
+  level       String
+  language    String
+  isFeatured  Boolean
+  isShow      Boolean
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt @db.Timestamp(3)
 }
 
 model Promotion {
-  id            String  @unique @default(cuid()) @id
-  text          String
-  image         String
-  link          String
-  isShow        Boolean
-  showingOn     String[]
+  id        String    @id @unique @default(cuid())
+  text      String
+  image     String
+  link      String
+  isShow    Boolean
+  showingOn String[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt @db.Timestamp(3)
 }

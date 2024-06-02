@@ -16,7 +16,7 @@ export type SuccessState = {
   status: 'success'
 }
 
-export type CreateItemState<T> = { form: T } & (SuccessState | SubmitErrorState | FieldErrorsState<T> | DefaultState)
+export type ActionItemState<T> = { form: T } & (SuccessState | SubmitErrorState | FieldErrorsState<T> | DefaultState)
 
 export type FormActionType = 'create' | 'update'
 

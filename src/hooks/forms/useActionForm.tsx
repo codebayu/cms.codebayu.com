@@ -4,15 +4,15 @@ import { DefaultValues, FieldValues, useForm } from 'react-hook-form'
 import { ZodSchema } from 'zod'
 import { useDialogStore } from '@/stores/dialog'
 import { useFormStore } from '@/stores/form'
-import { CreateItemState, WithId } from '@/types/actions'
+import { ActionItemState, WithId } from '@/types/actions'
 import { useToast } from '@/components/ui/use-toast'
 
 interface ActionFormDependencies<T, D> {
   title: string
-  schema: ZodSchema<D>
+  schema: ZodSchema<T>
   defaultValue: DefaultValues<T & FieldValues>
-  createAction: (data: T) => Promise<CreateItemState<T>>
-  updateAction: (data: T & { id: string }) => Promise<CreateItemState<T>>
+  createAction: (data: T) => Promise<ActionItemState<T>>
+  updateAction: (data: D) => Promise<ActionItemState<D>>
 }
 
 export default function useActionForm<T, D>({
@@ -43,7 +43,7 @@ export default function useActionForm<T, D>({
         await onCreateAction(data)
         return
       }
-      await onUpdateAction(data as WithId<T>)
+      await onUpdateAction(data as WithId<D>)
     })
   }
 
@@ -61,7 +61,7 @@ export default function useActionForm<T, D>({
     })
   }
 
-  async function onUpdateAction(values: WithId<T>) {
+  async function onUpdateAction(values: WithId<D>) {
     const result = await updateAction({
       ...values,
       id: defaultValueForm.id

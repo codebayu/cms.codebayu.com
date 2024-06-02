@@ -1,11 +1,13 @@
 import { z } from 'zod'
 
-export const promotionDefaultValueForm: ICreatePromotionDto = {
+export const promotionDefaultValueForm = {
   text: '',
   image: '',
   isShow: false,
   link: '',
-  showingOn: []
+  showingOn: [],
+  createdAt: new Date(),
+  updatedAt: null
 }
 
 export const pageOptions = [
@@ -30,9 +32,11 @@ export type IPromotion = {
   image: string
   showingOn: string[]
   isShow: boolean
+  createdAt: Date
+  updatedAt: Date | null
 }
 
-export type ICreatePromotionDto = {
+export type IPromotionPayloadCreate = {
   text: string
   link: string
   image: string
@@ -40,10 +44,7 @@ export type ICreatePromotionDto = {
   isShow: boolean
 }
 
-export type CreatePromotion = (promotion: ICreatePromotionDto) => void
-export type DeletePromotion = (promotionId: string) => void
-export type UpdatePromotion = (promotion: IPromotion) => void
-export type GetPromotion = (promotionId: string) => Promise<IPromotion>
+export type IPromotionPayloadUpdate = { id: string } & IPromotionPayloadCreate
 
 export const promotionSchema = z.object({
   text: z.string().min(1),

@@ -5,6 +5,10 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { checkPermission } from '@/lib/auth'
 import { PrismaError } from '@/utils/error'
 
+type ExpludeField = 'createdAt'
+type CareerCreateInput = Omit<Prisma.CareerCreateInput, ExpludeField>
+type CareerUncheckedCreateInput = Omit<Prisma.CareerUncheckedCreateInput, ExpludeField>
+
 export class CareerUseCase {
   private readonly repository: CareerRepository
 
@@ -17,7 +21,8 @@ export class CareerUseCase {
       const offset = (page - 1) * ITEM_PER_PAGE
       const careers = await this.repository.findMany({
         skip: offset,
-        take: ITEM_PER_PAGE
+        take: ITEM_PER_PAGE,
+        orderBy: { startDate: 'desc' }
       })
       return careers
     } catch (err) {
@@ -46,10 +51,10 @@ export class CareerUseCase {
     }
   }
 
-  async createCareer(career: Prisma.XOR<Prisma.CareerCreateInput, Prisma.CareerUncheckedCreateInput>) {
+  async createCareer(career: Prisma.XOR<CareerCreateInput, CareerUncheckedCreateInput>) {
     await checkPermission()
     try {
-      const data = await this.repository.create({ data: career })
+      const data = await this.repository.create({ data: { ...career, createdAt: new Date() } })
       return data
     } catch (err) {
       const error = err as PrismaClientKnownRequestError

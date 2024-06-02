@@ -2,8 +2,8 @@
 
 import useActionForm from '@/hooks/forms/useActionForm'
 import {
-  ICreatePromotionDto,
-  IPromotion,
+  IPromotionPayloadCreate,
+  IPromotionPayloadUpdate,
   pageOptions,
   promotionDefaultValueForm,
   promotionSchema
@@ -19,8 +19,8 @@ import { createPromotionAction, updatePromotionAction } from '../action/promotio
 
 export default function PromotionForm() {
   const { copyButtonIdle, copyButtonSubmitting, form, formType, defaultValueForm, isPending, onSubmit } = useActionForm<
-    IPromotion,
-    ICreatePromotionDto
+    IPromotionPayloadCreate,
+    IPromotionPayloadUpdate
   >({
     title: 'promotion',
     schema: promotionSchema,
@@ -29,7 +29,7 @@ export default function PromotionForm() {
     updateAction: updatePromotionAction
   })
 
-  function onHandleSubmit(data: ICreatePromotionDto) {
+  function onHandleSubmit(data: IPromotionPayloadCreate) {
     onSubmit({ ...data })
   }
 

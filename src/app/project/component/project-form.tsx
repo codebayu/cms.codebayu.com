@@ -2,7 +2,13 @@
 
 import { generateSlug } from '@/utils/functions'
 import useActionForm from '@/hooks/forms/useActionForm'
-import { ICreateProjectDto, IProject, projectDefaultValueForm, projectSchema, stackOptions } from '@/constants/project'
+import {
+  IProjectPayloadCreate,
+  IProjectPayloadUpdate,
+  projectDefaultValueForm,
+  projectSchema,
+  stackOptions
+} from '@/constants/project'
 import SubmitButton from '@/components/elements/submit-button'
 import SwitchCard from '@/components/elements/switch-card'
 import { Button } from '@/components/ui/button'
@@ -15,8 +21,8 @@ import { createProjectAction, updateProjectAction } from '../action/project-form
 
 export default function ProjectForm() {
   const { copyButtonIdle, copyButtonSubmitting, form, formType, defaultValueForm, isPending, onSubmit } = useActionForm<
-    IProject,
-    ICreateProjectDto
+    IProjectPayloadCreate,
+    IProjectPayloadUpdate
   >({
     title: 'project',
     schema: projectSchema,
@@ -25,8 +31,8 @@ export default function ProjectForm() {
     updateAction: updateProjectAction
   })
 
-  function onHandleSubmit(data: ICreateProjectDto) {
-    onSubmit({ ...data, slug: generateSlug(data.title), updatedAt: new Date() })
+  function onHandleSubmit(data: IProjectPayloadCreate) {
+    onSubmit({ ...data, slug: generateSlug(data.title) })
   }
 
   return (

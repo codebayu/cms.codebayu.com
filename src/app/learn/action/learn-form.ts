@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache'
 import { LearnUseCase } from '@/usecase/learn'
-import { CreateItemState } from '@/types/actions'
-import { ICreateLearnDto, ILearn } from '@/constants/learn'
+import { ActionItemState } from '@/types/actions'
+import { ILearnPayloadCreate, ILearnPayloadUpdate } from '@/constants/learn'
 
 const usecase = new LearnUseCase()
 
-export async function createLearnAction(formData: ILearn): Promise<CreateItemState<ICreateLearnDto>> {
+export async function createLearnAction(formData: ILearnPayloadCreate): Promise<ActionItemState<ILearnPayloadCreate>> {
   try {
     const data = await usecase.createLearn(formData)
     revalidatePath('/learn')
@@ -25,7 +25,7 @@ export async function createLearnAction(formData: ILearn): Promise<CreateItemSta
   }
 }
 
-export async function updateLearnAction(formData: ILearn): Promise<CreateItemState<ILearn>> {
+export async function updateLearnAction(formData: ILearnPayloadUpdate): Promise<ActionItemState<ILearnPayloadUpdate>> {
   try {
     const data = await usecase.updateLearn(formData)
     revalidatePath('/learn')

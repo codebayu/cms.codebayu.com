@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { generateRandomString } from '@/utils/functions'
 
-export const learnDefaultValueForm: ICreateLearnDto = {
+export const learnDefaultValueForm = {
   title: '',
   description: '',
   image: '',
@@ -9,7 +9,9 @@ export const learnDefaultValueForm: ICreateLearnDto = {
   level: 'easy',
   slug: generateRandomString(10),
   isFeatured: false,
-  isShow: false
+  isShow: false,
+  updatedAt: new Date(),
+  createdAt: new Date()
 }
 
 export const levelOptions = [
@@ -37,9 +39,11 @@ export type ILearn = {
   language: string
   isFeatured: boolean
   isShow: boolean
+  updatedAt: Date | null
+  createdAt: Date
 }
 
-export type ICreateLearnDto = {
+export type ILearnPayloadCreate = {
   title: string
   description: string
   image: string
@@ -50,10 +54,7 @@ export type ICreateLearnDto = {
   isShow: boolean
 }
 
-export type CreateLearn = (learn: ICreateLearnDto) => void
-export type DeleteLearn = (learnId: string) => void
-export type UpdateLearn = (learn: ILearn) => void
-export type GetLearn = (learnId: string) => Promise<ILearn>
+export type ILearnPayloadUpdate = { id: string } & ILearnPayloadCreate
 
 export const learnSchema = z.object({
   title: z.string().min(1),

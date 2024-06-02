@@ -3,8 +3,8 @@
 import { generateSlug } from '@/utils/functions'
 import useActionForm from '@/hooks/forms/useActionForm'
 import {
-  ICreateLearnDto,
-  ILearn,
+  ILearnPayloadCreate,
+  ILearnPayloadUpdate,
   languageOptions,
   learnDefaultValueForm,
   learnSchema,
@@ -20,8 +20,8 @@ import { createLearnAction, updateLearnAction } from '../action/learn-form'
 
 export default function LearnForm() {
   const { copyButtonIdle, copyButtonSubmitting, form, formType, isPending, onSubmit } = useActionForm<
-    ILearn,
-    ICreateLearnDto
+    ILearnPayloadCreate,
+    ILearnPayloadUpdate
   >({
     title: 'learn',
     schema: learnSchema,
@@ -30,7 +30,7 @@ export default function LearnForm() {
     updateAction: updateLearnAction
   })
 
-  function onHandleSubmit(data: ICreateLearnDto) {
+  function onHandleSubmit(data: ILearnPayloadCreate) {
     onSubmit({ ...data, slug: generateSlug(data.title) })
   }
 
