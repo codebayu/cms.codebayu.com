@@ -26,6 +26,16 @@ export class PromotionUseCase {
     }
   }
 
+  async getPromotionById(id: string) {
+    try {
+      const promotion = await this.repository.findUnique({ where: { id } })
+      return promotion
+    } catch (err) {
+      const error = err as PrismaClientKnownRequestError
+      throw new PrismaError(error.code)
+    }
+  }
+
   async getTotalPromotion() {
     try {
       const count = await this.repository.count()

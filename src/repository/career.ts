@@ -13,6 +13,11 @@ export class CareerRepository {
     return data
   }
 
+  async findUnique(args: Prisma.CareerFindUniqueArgs) {
+    const data = await this.collection.findUnique(args)
+    return data
+  }
+
   async count() {
     const count = await this.collection.count()
     return count

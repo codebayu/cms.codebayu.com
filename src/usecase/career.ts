@@ -26,6 +26,16 @@ export class CareerUseCase {
     }
   }
 
+  async getCareerById(id: string) {
+    try {
+      const career = await this.repository.findUnique({ where: { id } })
+      return career
+    } catch (err) {
+      const error = err as PrismaClientKnownRequestError
+      throw new PrismaError(error.code)
+    }
+  }
+
   async getTotalCareer() {
     try {
       const count = await this.repository.count()
