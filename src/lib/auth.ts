@@ -16,6 +16,9 @@ declare module 'next-auth' {
 
 export const authConfig = {
   adapter: PrismaAdapter(prisma) as Adapter,
+  pages: {
+    signIn: '/login'
+  },
   providers: [
     Credentials({
       name: 'Credentials',
